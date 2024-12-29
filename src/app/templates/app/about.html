@@ -1,21 +1,22 @@
 {% extends 'app/base.html' %}
- <title>Un poco sobre mí</title>
+{% load static %}
+
+{% block title %}
+Un poco sobre mí
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Sobre mi</h1>
-            <p>¡Hola! Soy una docente apasionado desarrollar software con la idea de aprender muchso sobre Python. Me encanta enseñar, pero me llama la atención el data sience. Tengo experiencia como docente en la enseñanza de programación y he impartido cursos a estudiantes de todos los niveles, desde principiantes hasta avanzados.</p>
+        <div class="col-md-12 text-center">
+            <!-- Imagen agregada -->
+            <img src="{% static 'app/img/profile.jpg' %}" alt="Foto de perfil" class="img-fluid rounded-circle mb-4" style="max-width: 150px;">
+            <h1>Sobre mí</h1>
+            <p>¡Hola! Soy una docente apasionada por desarrollar software con la idea de aprender mucho sobre Python. Me encanta enseñar, pero también me atrae el mundo del <strong>data science</strong>. Tengo experiencia como docente en la enseñanza de programación y he impartido cursos a estudiantes de todos los niveles, desde principiantes hasta avanzados.</p>
             <p>Me gusta trabajar en equipo y colaborar con otros desarrolladores para crear soluciones innovadoras y eficientes. Siempre estoy buscando nuevas formas de mejorar mis habilidades y aprender nuevas tecnologías.</p>
-            <p>Cuando no estoy programando, me gusta leer.</p>
-            <p>Creo que nunca es tarde para aprender, y nunca se es muy viejo para intentarlo, más vale morir en el intento, que vivir sin haberlo intentado.</p>
+            <p>Cuando no estoy programando, disfruto leer libros de diferentes géneros.</p>
+            <p>Creo firmemente que nunca es tarde para aprender y que nunca se es demasiado mayor para intentarlo. Más vale morir en el intento que vivir sin haberlo intentado.</p>
         </div>
-    </div>
-    <div>
-        <img src="{% static 'app/img/logo.png' %}" alt="imagen" class="img-fluid rounded shadow-lg">
     </div>
 </div>
 {% endblock %}
-
-
-       

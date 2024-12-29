@@ -1,3 +1,56 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.shortcuts import render, get_object_or_404
+from .models import Producto, Cliente, Pedido
+
+def index(request):
+    return render(request, 'app/index.html')
+
+def productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'app/productos.html', {'productos': productos})
+
+def producto_detalle(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    return render(request, 'app/producto_detalle.html', {'producto': producto})
+
+def clientes(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'app/clientes.html', {'clientes': clientes})
+
+def pedido_detalle(request, id):
+    pedido = get_object_or_404(Pedido, id=id)
+    return render(request, 'app/pedido_detalle.html', {'pedido': pedido})
+
+def profile(request):
+    return render(request, 'app/profile.html')
+
+def about(request):
+    return render(request, 'app/about.html')
+
+def contact(request):
+    return render(request, 'app/contact.html')
+                  
+def login(request):
+    return render(request, 'app/login.html')
+
+def register(request):
+    return render(request, 'app/register.html')
+
+def logout(request):
+    return render(request, 'app/logout.html')
+
+# core/views.py
+
+from django.shortcuts import render, redirect
+from .forms import ProductoForm
+
+def producto_nuevo(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('app:productos')
+    else:
+        form = ProductoForm()
+    return render(request, 'app/producto_form.html', {'form': form})

@@ -9,14 +9,14 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'app:productos' %}">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'app:about' %}">Acerca de mí</a></li>
                     <li class="nav-item">
-                        <form action="{% url 'app:logout' %}" method="post">
+                        <form action="{% url 'app:login' %}" method="post">
                             {% csrf_token %}
-                            <button class="nav-link btn btn-link" type="submit">Logout</button>
+                            <button class="nav-link btn btn-link" type="submit">Login</button>
                         </form>
                     </li>
 
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'app:about' %}">About-me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'app:about' %}">Acerca de </a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'app:login' %}">Login</a></li>
                 {% endif %}
 

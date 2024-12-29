@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -119,7 +120,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Esta línea es opcional si tienes archivos estáticos adicionales en otra ubicación
+# Esta línea es opcional si tienes archivos estáticos adicionales en otra ubicació
+
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "app/static",
 ]
@@ -134,3 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = 'app:productos'
+LOGOUT_REDIRECT_URL = 'app:login'

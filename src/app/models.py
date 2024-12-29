@@ -48,7 +48,7 @@ class Pedido(models.Model):
     estado = models.CharField(max_length=50)
 
     def __str__(self):
-        return f"Pedido {self.id} - {self.cliente.nombre}"
+        return f"Pedido {self.id} - {self.cliente.nombre}" # type: ignore
 
 class DetallePedido(models.Model):
     pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
@@ -57,4 +57,4 @@ class DetallePedido(models.Model):
     precio_unitario = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"{self.pedido.id} - {self.producto.nombre}"
+        return f"{self.pedido.id} - {self.producto.nombre}" # type: ignore

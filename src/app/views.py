@@ -9,20 +9,6 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
 
-class CustomLoginView(LoginView):
-    template_name = 'app/login.html'
-    form_class = LoginForm
-    redirect_authenticated_user = True
-
-class CustomLogoutView(LogoutView):
-    next_page = reverse_lazy('app:login')
-
-@method_decorator(login_required, name='dispatch')
-class ProductoUpdateView(UpdateView):
-    model = Producto
-    fields = ['nombre', 'descripcion', 'precio', 'disponibilidad', 'imagen']
-    template_name = 'app/producto_form.html'
-    success_url = reverse_lazy('app:productos')
 
 def index(request):
     return render(request, 'app/index.html')

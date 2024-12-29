@@ -7,7 +7,6 @@
                 {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'app:index' %}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'app:productos' %}">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'app:profile' %}">Perfil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'app:about' %}">Acerca de mí</a></li>
                     <li class="nav-item">
                         <form action="{% url 'app:logout' %}" method="post">

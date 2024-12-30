@@ -13,18 +13,30 @@
 <body>
     {% include 'app/componentes/navbar.html' %}
 
+    <!-- Mensajes -->
+    {% if messages %}
+    <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- Banner -->
     <div class="container-fluid p-0">
         <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{% static 'app/img/PendonV1.png' %}" class="d-block w-100" alt="Frabrica de masas">
+                    <img src="{% static 'app/img/PendonV1.png' %}" class="d-block w-100" alt="Imagen de banner de Fábrica de masas" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="{% static 'app/img/PendonV4.png' %}" class="d-block w-100" alt="Frabrica de masas">
+                    <img src="{% static 'app/img/PendonV4.png' %}" class="d-block w-100" alt="Imagen de banner de Fábrica de masas" loading="lazy">
                 </div>
                 <div class="carousel-item">
-                    <img src="{% static 'app/img/PendonV8.png' %}" class="d-block w-100" alt="Frabrica de masas">
+                    <img src="{% static 'app/img/PendonV8.png' %}" class="d-block w-100" alt="Imagen de banner de Fábrica de masas" loading="lazy">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
@@ -44,7 +56,7 @@
             <div class="col-md-8">
                 <h2>Sobre Nosotros</h2>
                 <p>Fábrica de masas "Camila" es una empresa dedicada a proporcionar diversos productos de masas para el mercado Chileno. Nos especializamos en productos de alta calidad y servicio al cliente excepcional.</p>
-                <p>Nuestra misión es entregar un producto que pueda ser usado en todo tio de eventos y un servicio superior. Nos esforzamos por ser líderes en nuestro sector y un referente de calidad y confianza.</p>
+                <p>Nuestra misión es entregar un producto que pueda ser usado en todo tipo de eventos y un servicio superior. Nos esforzamos por ser líderes en nuestro sector y un referente de calidad y confianza.</p>
             </div>
             <div class="col-md-4">
                 <h2>Contáctanos</h2>
@@ -61,12 +73,22 @@
     <div class="container my-5 text-center">
         <h2>Síguenos en Redes Sociales</h2>
         <div class="d-flex justify-content-center">
-            <a href="https://www.facebook.com" target="_blank" class="btn btn-primary mx-2"><i class="fab fa-facebook-f"></i> Facebook</a>
-            <a href="https://www.twitter.com" target="_blank" class="btn btn-info mx-2"><i class="fab fa-twitter"></i> Twitter</a>
-            <a href="https://www.instagram.com" target="_blank" class="btn btn-danger mx-2"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://www.linkedin.com" target="_blank" class="btn btn-primary mx-2"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            <a href="https://www.facebook.com" target="_blank" class="btn btn-primary mx-2" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://www.twitter.com" target="_blank" class="btn btn-info mx-2" aria-label="Twitter">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="btn btn-danger mx-2" aria-label="Instagram">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" class="btn btn-primary mx-2" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i> LinkedIn
+            </a>
         </div>
     </div>
+
+
 
     {% include 'app/componentes/footer.html' %}
 

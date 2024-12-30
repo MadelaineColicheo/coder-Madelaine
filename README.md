@@ -1,4 +1,3 @@
-# coder-Madelaine
 # Coder-MadelaineColicheo
 # Curso Python
 
@@ -13,7 +12,6 @@ Linkedin:  inkedin.com/in/esteban-acevedo-aberastian
 ## Alumno
 
 Nombre: Madelaine Colicheo
-
 
 ## Entrega
 Modelo de Base de Datos para una Fábrica de Masas y Empanadas

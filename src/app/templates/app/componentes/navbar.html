@@ -26,6 +26,15 @@
                 </li>
                 <!-- Lógica de autenticación -->
                 {% if user.is_authenticated %}
+                    <!-- Enlace al panel de administración -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'app:editar_categoria' 1 %}">Editar categoría</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'app:editar_producto' 1 %}">Editar producto</a>
+                    </li>
+                    
+
                     <!-- Botón para cerrar sesión -->
                     <li class="nav-item">
                         <form action="{% url 'app:logout' %}" method="post">

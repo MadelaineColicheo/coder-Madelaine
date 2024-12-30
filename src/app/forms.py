@@ -1,22 +1,37 @@
 # app/forms.py
 
 from django import forms
-from .models import Producto
+from .models import Producto, Categoria
 from typing import Any
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre de usuario'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Contraseña'}))
+
+class CustomAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = AuthenticationForm
+        fields = ['username', 'password']
+
 
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion', 'precio', 'disponibilidad', 'imagen']
+        fields = ['nombre', 'descripcion', 'categoria', 'precio', 'imagen', 'disponibilidad']
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'rows': 4}),
+        }
+
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ['nombre', 'descripcion']
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'rows': 4}),
+        }
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
+        fields = ['username', 'password1', 'password2']
+

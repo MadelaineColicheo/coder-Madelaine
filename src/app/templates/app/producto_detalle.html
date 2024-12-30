@@ -20,6 +20,7 @@
             <div class="col-md-6">
                 <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
                 <p><strong>Precio:</strong> ${{ producto.precio|floatformat:2 }}</p>
+                <p><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
                 {% if producto.disponibilidad %}
                 <p class="text-success">Disponible</p>
                 {% else %}

@@ -15,6 +15,18 @@
 
     {% include 'app/componentes/navbar.html' %}
 
+    <!-- Mensajes -->
+    {% if messages %}
+    <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <!-- Contenedor de formulario de inicio de sesión -->
     <div class="container my-5">
         <div class="row justify-content-center">
@@ -51,7 +63,7 @@
                 </form>
                 <!-- Enlace para recuperar la contraseña -->
                 <div class="text-center mt-3">
-                    <a href="{% url 'app:password_reset' %}">¿Olvidaste tu contraseña?</a>
+                    <a href="{% url 'app:register' %}">¿Olvidaste tu contraseña?</a>
                 </div>
             </div>
         </div>

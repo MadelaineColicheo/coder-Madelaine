@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Producto, Cliente, Pedido
+from .models import Producto, Cliente, Pedido, Categoria
+
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from .forms import LoginForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
@@ -17,24 +17,23 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import ProductoForm
 from .forms import CustomUserCreationForm
+from .forms import CustomAuthenticationForm
 
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
+from django.http import HttpResponse
+
 
 #user = User.objects.create_user('Madelaiane', 'madelaine@dominio.com', '123456789')
 #user.first_name = 'Madelaine'
 #user.last_name = 'Colicheo'
 #user.save()
 
-
-@login_required
-def protected_view(request):
-    # Vista protegida solo para usuarios autenticados.
-    return render(request, 'app/protected_page.html')
+from .forms import ProductoForm, CategoriaForm  # Asegúrate de importar ambos formularios
 
 
 def index(request):
-    return render(request, 'app/index.html')
+    return render(request, 'app/index.html', {'user': request.user})
 
 def productos(request):
     productos = Producto.objects.all()
@@ -61,27 +60,29 @@ def about(request):
 def contact(request):
     return render(request, 'app/contact.html')
                   
-def login(request):
-    #user = User.objects.create_user('Madelaiane', 'madelaine@dominio.com', '123456789')
+'''def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, "¡Has iniciado sesión exitosamente!")
-                return redirect('app:index')
-            else:
-                messages.error(request, "Nombre de usuario o contraseña incorrectos.")
-        else:
-            messages.error(request, "Formulario inválido.")
+            user = form.get_user()
+            login(request, user)
+            return redirect('app:index')  # O la URL a la que quieras redirigir después de iniciar sesión
     else:
         form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+'''                
+class login(LoginView):
+    authentication_form = CustomAuthenticationForm
+    template_name = 'app/login.html'
+    next_page = reverse_lazy('app:index')
 
-    return render(request, 'app/login.html', {'form': form})
-
+    def form_valid(self, form: AuthenticationForm) -> HttpResponse:
+        usuario = form.get_user()
+        messages.success(
+            self.request, f'Inicio de sesión exitoso ¡Bienvenido {usuario.username}!'
+        )
+        return super().form_valid(form)
+    
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -98,18 +99,35 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'app/register.html', {'form': form})
 
+#@login_required
+#def logout(request):
+ #   messages.success(request, "Has cerrado sesión exitosamente.")
+ #     return redirect('app:index')
 
-def logout(request):
-    messages.success(request, "Has cerrado sesión exitosamente.")
-    return redirect('app:index')
-
-
-def producto_nuevo(request):
+@login_required
+def editar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    
     if request.method == 'POST':
-        form = ProductoForm(request.POST, request.FILES)
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
         if form.is_valid():
             form.save()
-            return redirect('app:productos')
+            return redirect('app:productos')  # Redirige a la página de productos después de guardar
     else:
-        form = ProductoForm()
-    return render(request, 'app/producto_form.html', {'form': form})
+        form = ProductoForm(instance=producto)
+
+    return render(request, 'app/editar_producto.html', {'form': form, 'producto': producto})
+
+@login_required
+def editar_categoria(request, categoria_id):
+    categoria = get_object_or_404(Categoria, id=categoria_id)
+    
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect('app:index')  # Redirige a la página principal después de guardar
+    else:
+        form = CategoriaForm(instance=categoria)
+
+    return render(request, 'app/editar_categoria.html', {'form': form, 'categoria': categoria})

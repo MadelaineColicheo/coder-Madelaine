@@ -14,14 +14,6 @@ class CustomAuthenticationForm(AuthenticationForm):
         fields = ['username', 'password']
 
 
-class ProductoForm(forms.ModelForm):
-    class Meta:
-        model = Producto
-        fields = ['nombre', 'descripcion', 'categoria', 'precio', 'imagen', 'disponibilidad']
-        widgets = {
-            'descripcion': forms.Textarea(attrs={'rows': 4}),
-        }
-
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
@@ -34,4 +26,10 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
+
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'descripcion', 'categoria', 'precio', 'imagen', 'disponibilidad']
 

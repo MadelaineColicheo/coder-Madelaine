@@ -24,10 +24,6 @@ from django.db.utils import IntegrityError
 from django.http import HttpResponse
 
 
-#user = User.objects.create_user('Madelaiane', 'madelaine@dominio.com', '123456789')
-#user.first_name = 'Madelaine'
-#user.last_name = 'Colicheo'
-#user.save()
 
 from .forms import ProductoForm, CategoriaForm  # Asegúrate de importar ambos formularios
 
@@ -103,31 +99,37 @@ def register(request):
 #def logout(request):
  #   messages.success(request, "Has cerrado sesión exitosamente.")
  #     return redirect('app:index')
+@login_required
+def listar_productos(request):
+    productos = Producto.objects.all()  # Obtiene todos los productos
+    return render(request, 'app/listar_productos.html', {'productos': productos})
 
 @login_required
 def editar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
-    
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES, instance=producto)
         if form.is_valid():
             form.save()
-            return redirect('app:productos')  # Redirige a la página de productos después de guardar
+            return redirect('app:listar_productos')  # Vuelve a la lista de productos
     else:
         form = ProductoForm(instance=producto)
-
     return render(request, 'app/editar_producto.html', {'form': form, 'producto': producto})
+
+@login_required
+def listar_categorias(request):
+    categorias = Categoria.objects.all()  # Obtiene todas las categorías
+    return render(request, 'app/listar_categorias.html', {'categorias': categorias})
 
 @login_required
 def editar_categoria(request, categoria_id):
     categoria = get_object_or_404(Categoria, id=categoria_id)
-    
     if request.method == 'POST':
         form = CategoriaForm(request.POST, instance=categoria)
         if form.is_valid():
             form.save()
-            return redirect('app:index')  # Redirige a la página principal después de guardar
+            return redirect('app:listar_categorias')  # Vuelve a la lista de categorías
     else:
         form = CategoriaForm(instance=categoria)
-
     return render(request, 'app/editar_categoria.html', {'form': form, 'categoria': categoria})
+

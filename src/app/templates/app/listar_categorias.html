@@ -6,20 +6,25 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             {% for categoria in categorias %}
             <tr>
-                <td>{{ categoria.id }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ categoria.nombre }}</td>
-                <td>{{ categoria.descripcion }}</td>
                 <td>
-                    <a href="{% url 'app:editar_categoria' categoria.id %}" class="btn btn-primary btn-sm">Editar</a>
+                    <!-- Botón para editar -->
+                    <a href="{% url 'app:editar_categoria' categoria.id %}" class="btn btn-warning btn-sm">Editar</a>
+                    
+                    <!-- Botón para eliminar -->
+                    <form method="post" action="{% url 'app:eliminar_categoria' categoria.id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');">Eliminar</button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}

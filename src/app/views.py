@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Producto, Cliente, Pedido, Categoria
 
 from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import UpdateView
@@ -21,9 +21,7 @@ from .forms import CustomAuthenticationForm
 
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
-from django.http import HttpResponse
-
-
+from django.http import HttpResponse, HttpResponseRedirect
 
 from .forms import ProductoForm, CategoriaForm  # Asegúrate de importar ambos formularios
 
@@ -132,4 +130,16 @@ def editar_categoria(request, categoria_id):
     else:
         form = CategoriaForm(instance=categoria)
     return render(request, 'app/editar_categoria.html', {'form': form, 'categoria': categoria})
+
+@login_required
+def eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    producto.delete()
+    return HttpResponseRedirect(reverse('app:listar_productos'))
+
+@login_required
+def eliminar_categoria(request, categoria_id):
+    categoria = get_object_or_404(Categoria, id=categoria_id)
+    categoria.delete()
+    return HttpResponseRedirect(reverse('app:listar_categorias'))
 

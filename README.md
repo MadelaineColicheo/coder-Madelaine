@@ -1,4 +1,3 @@
-# coder-Madelaine
 # Coder-MadelaineColicheo
 # Curso Python
 

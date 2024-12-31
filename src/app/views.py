@@ -135,11 +135,14 @@ def editar_categoria(request, categoria_id):
 def eliminar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     producto.delete()
+    messages.success(request, "Producto eliminado con éxito.")
     return HttpResponseRedirect(reverse('app:listar_productos'))
+
 
 @login_required
 def eliminar_categoria(request, categoria_id):
     categoria = get_object_or_404(Categoria, id=categoria_id)
     categoria.delete()
+    messages.success(request, "Categoría eliminada con éxito.")
     return HttpResponseRedirect(reverse('app:listar_categorias'))
 

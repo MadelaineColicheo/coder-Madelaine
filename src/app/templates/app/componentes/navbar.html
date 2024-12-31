@@ -28,10 +28,10 @@
                 {% if user.is_authenticated %}
                     <!-- Enlace al panel de administración -->
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'listar_categorias' %}active{% endif %}" href="{% url 'app:listar_categorias' %}">Editar Categorías</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'listar_categorias' %}active{% endif %}" href="{% url 'app:listar_categorias' %}">Configuración de Categorías</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'listar_productos' %}active{% endif %}" href="{% url 'app:listar_productos' %}">Editar productos</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'listar_productos' %}active{% endif %}" href="{% url 'app:listar_productos' %}">Configuación de productos</a>
                     </li>
 
                     <!-- Botón para cerrar sesión -->

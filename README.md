@@ -7,12 +7,9 @@ Comisión: 60095
 
 Profesor: Esteban Acevedo
 
-Linkedin:  inkedin.com/in/esteban-acevedo-aberastian
-
 ## Alumno
 
 Nombre: Madelaine Colicheo
-
 
 ## Entrega
 Modelo de Base de Datos para una Fábrica de Masas y Empanadas

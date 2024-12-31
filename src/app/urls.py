@@ -23,4 +23,6 @@ urlpatterns = [
     path('producto/editar/<int:producto_id>/', views.editar_producto, name='editar_producto'),  # Vista para editar producto
     path('categorias/eliminar/<int:categoria_id>/', views.eliminar_categoria, name='eliminar_categoria'),
     path('productos/eliminar/<int:producto_id>/', views.eliminar_producto, name='eliminar_producto'),
+     path('categorias/crear/', views.crear_categoria, name='crear_categoria'),  # Vista para crear categoría
+
 ]

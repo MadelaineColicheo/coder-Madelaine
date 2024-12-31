@@ -146,3 +146,15 @@ def eliminar_categoria(request, categoria_id):
     messages.success(request, "Categoría eliminada con éxito.")
     return HttpResponseRedirect(reverse('app:listar_categorias'))
 
+@login_required
+def crear_categoria(request):
+    if request.method == "POST":
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('app:listar_categorias')
+    else:
+        form = CategoriaForm()
+    
+    return render(request, 'app/crear_categoria.html', {'form': form})
+

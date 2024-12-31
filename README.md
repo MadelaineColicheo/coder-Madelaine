@@ -12,7 +12,16 @@ Profesor: Esteban Acevedo
 Nombre: Madelaine Colicheo
 
 ## Entrega
-Modelo de Base de Datos para una Fábrica de Masas y Empanadas
+
+Este es una Página de Fabrica de masas y empanadas, donde se puede ver los productos que se ofrecen, los precios, y la descripción de cada uno. También se puede ver las categorías de los productos y los ingredientes que se utilizan en cada uno. También se puede ver los contactos de la empresa y la ubicación de la misma.
+
+## Hay opciones que solo pueden realizar las personas registradas.
+## Se seguirá mejorando aunque la entrega ya se haya realizado.
+
+# Tener en cuenta esto o crear una para eliminarla.
+Como la unica categoria que no esta relacionada a un producto es Masas para horno, esa es la que se puede eliminar para las pruebas ya que en mi modelo use CASCADE, por lo que si se elimina una categoria se eliminan los productos relacionados a esa categoria.
+
+Modelo de Base de Datos para una Fábrica de Masas y Empanadas 
 
 1. Tabla: Productos
 Esta tabla almacenará información sobre cada producto que fabrica la empresa (masas, empanadas, etc.).
